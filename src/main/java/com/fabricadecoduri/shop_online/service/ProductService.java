@@ -1,6 +1,5 @@
 package com.fabricadecoduri.shop_online.service;
 
-import com.fabricadecoduri.shop_online.model.Brand;
 import com.fabricadecoduri.shop_online.model.Product;
 import com.fabricadecoduri.shop_online.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +13,48 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product getProductById( Long id){
+    public Product getProductById(Long id) {
         return productRepository.getReferenceById(id);
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         productRepository.save(product);
     }
 
-    public void deleteProductById(Long id){
+    public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
-    public List<Product> getAllProducts(){
+
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
-    public void editProductById(Product product, Long id){
-    Product productForEdit = productRepository.getReferenceById(id);
-    productForEdit.setPrice(product.getPrice());
-    productForEdit.setQuantity(product.getQuantity());
-    productForEdit.setColor(product.getColor());
-    productForEdit.setGender(product.getGender());
-    productForEdit.setSize(product.getSize());
-    productForEdit.setModel(product.getModel());
-    productRepository.save(productForEdit);
+
+    public void editProductById(Product product, Long id) {
+        Product productForEdit = productRepository.getReferenceById(id);
+        productForEdit.setPrice(product.getPrice());
+        productForEdit.setQuantity(product.getQuantity());
+        productForEdit.setColor(product.getColor());
+        productForEdit.setGender(product.getGender());
+        productForEdit.setSize(product.getSize());
+        productForEdit.setModel(product.getModel());
+        productRepository.save(productForEdit);
+    }
+
+    public void addSpecificProduct(Long id) {
+        Product productToAdd = productRepository.getReferenceById(id);
+        productToAdd.setQuantity(productToAdd.getQuantity() + 1);
+        productRepository.save(productToAdd);
+    }
+
+    public double buyProduct(Long id, Product product) {
+        if (product.getQuantity() > 0) {
+            Product productToBuy = productRepository.getReferenceById(id);
+            productToBuy.setQuantity(productToBuy.getQuantity() - 1);
+            productRepository.save(productToBuy);
+            return product.getPrice();
+        } else {
+            System.out.println("Out of stock");
+            return 0;
+        }
     }
 }
