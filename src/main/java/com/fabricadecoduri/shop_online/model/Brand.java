@@ -38,11 +38,6 @@ public class Brand {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,5 +45,4 @@ public class Brand {
     private String name;
     @Column(name = "description")
     private String description;
-
 }

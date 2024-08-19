@@ -34,5 +34,4 @@ public class BrandService {
         brandToId.setName(brand.getName());
         brandToId.setDescription(brand.getDescription());
     }
-
 }

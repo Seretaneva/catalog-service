@@ -40,5 +40,4 @@ public class ProductService {
         productToId.setCategory(product.getCategory());
         productToId.setQuantity(product.getQuantity());
     }
-
 }

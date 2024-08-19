@@ -12,5 +12,4 @@ public enum Category {
     COATS,
     ACCESSORIES,
     SWEATERS
-
 }

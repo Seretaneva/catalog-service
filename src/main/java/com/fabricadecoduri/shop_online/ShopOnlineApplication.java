@@ -1,6 +1,7 @@
 package com.fabricadecoduri.shop_online;
 
 import com.fabricadecoduri.shop_online.model.Brand;
+import com.fabricadecoduri.shop_online.model.Model;
 import com.fabricadecoduri.shop_online.model.Product;
 import com.fabricadecoduri.shop_online.repository.BrandRepository;
 import com.fabricadecoduri.shop_online.repository.ProductRepository;
@@ -14,7 +15,6 @@ public class ShopOnlineApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopOnlineApplication.class, args);
-		ProductService productService = new ProductService();
 	}
 
 }
