@@ -40,18 +40,18 @@ public class ProductService {
         productRepository.save(productForEdit);
     }
 
-    public void addSpecificProduct(Long id) {
+    public void addSpecificProduct(Long id, int quantity) {
         Product productToAdd = productRepository.getReferenceById(id);
-        productToAdd.setQuantity(productToAdd.getQuantity() + 1);
+        productToAdd.setQuantity(productToAdd.getQuantity() + quantity);
         productRepository.save(productToAdd);
     }
 
-    public double buyProduct(Long id, Product product) {
-        if (product.getQuantity() > 0) {
+    public double buyProduct(Long id, Product product, int quantity) {
+        if (product.getQuantity() - quantity > 0) {
             Product productToBuy = productRepository.getReferenceById(id);
-            productToBuy.setQuantity(productToBuy.getQuantity() - 1);
+            productToBuy.setQuantity(productToBuy.getQuantity() - quantity);
             productRepository.save(productToBuy);
-            return product.getPrice();
+            return product.getPrice() * quantity;
         } else {
             System.out.println("Out of stock");
             return 0;
